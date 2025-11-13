@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <Import Project="..\Shared.props" />
+  <Import Project="..\Shared-Files\Net-2x-4x-Support.proj" />
+
+  <PropertyGroup>
+	  <OutputType>Exe</OutputType>
+	  <TargetFrameworks>net6.0;net35;net40;net45;net46;net462;net48</TargetFrameworks>
+	  <!-- Net Framework misses Replace Ignore Case -->
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>disable</Nullable>
+	  <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Query Cache Reports\**" />
+    <EmbeddedResource Remove="Query Cache Reports\**" />
+    <None Remove="Query Cache Reports\**" />
+  </ItemGroup>
+
+	<ItemGroup>
+    <ProjectReference Include="..\Universe.SqlServer.SystemViews\Universe.SqlServer.SystemViews.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Universe.CpuUsage" Version="2.2.778.893" />
+    <PackageReference Include="Universe.SqlServerJam" Version="2.1.877" />
+  </ItemGroup>
+
+
+</Project>

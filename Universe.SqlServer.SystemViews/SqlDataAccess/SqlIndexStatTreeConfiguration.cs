@@ -1,0 +1,36 @@
+﻿using Universe.GenericTreeTable;
+
+namespace Universe.SqlServer.SystemViews.SqlDataAccess
+{
+    internal class SqlIndexStatTreeConfiguration : ITreeTableConfiguration<string, SqlIndexStatSummaryRow>
+    {
+        public IEqualityComparer<string> EqualityComparer { get; } = StringComparer.Ordinal;
+        public string Separator => TheSeparator;
+        public static readonly string TheSeparator = " \x2192 ";
+        public string KeyPartToText(string keyPart) => keyPart;
+
+
+        public readonly List<List<string>> TreeColumns;
+        public readonly Func<SqlIndexStatSummaryRow, List<object>> WriteMetricsCell;
+
+        public SqlIndexStatTreeConfiguration(List<List<string>> treeColumns, Func<SqlIndexStatSummaryRow, List<object>> writeMetricsCell)
+        {
+            TreeColumns = treeColumns;
+            WriteMetricsCell = writeMetricsCell;
+        }
+
+        public ConsoleTable CreateColumns()
+        {
+            var arg = TreeColumns.Select(x => (IEnumerable<string>)x.ToArray());
+            return new ConsoleTable(arg) { NeedUnicode = true };
+        }
+
+        public void WriteColumns(ConsoleTable table, string renderedKey, SqlIndexStatSummaryRow nodeData)
+        {
+            List<object> row = new List<object>();
+            row.Add(renderedKey);
+            row.AddRange(WriteMetricsCell(nodeData));
+            table.AddRow(row.ToArray());
+        }
+    }
+}
