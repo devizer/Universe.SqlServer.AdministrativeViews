@@ -2,7 +2,7 @@
 {
     public static class CustomSummaryRowReader
     {
-        private const string ENV_NAME_BASE = "SQL_QUERY_CACHE_SUMMARY_";
+        private const string ENV_NAME_BASE = "SQL_SYSTEM_VIEWS_SUMMARY_";
         private const string Header_Position_Value = "Header";
 
         public class CustomSummaryRow : SummaryRow

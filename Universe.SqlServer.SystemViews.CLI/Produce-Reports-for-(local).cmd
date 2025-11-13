@@ -1,1 +1,1 @@
-dotnet run -c Release -f net6.0 -- -s "(local)" -av -o "Query Cache Reports\Local\Server" 
+dotnet run -c Release -f net6.0 -- -s "(local)" -av -o "System Views Reports\Local\Server" 
