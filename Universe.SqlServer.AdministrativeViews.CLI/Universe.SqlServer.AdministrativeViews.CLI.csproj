@@ -13,6 +13,12 @@
 	  <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0' or '$(TargetFramework)' == 'net8.0' ">
+      <PackAsTool>true</PackAsTool>
+      <ToolCommandName>sql-server-administrative-views</ToolCommandName>
+      <PackageOutputPath>./nupkg</PackageOutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Query Cache Reports\**" />
     <EmbeddedResource Remove="Query Cache Reports\**" />
