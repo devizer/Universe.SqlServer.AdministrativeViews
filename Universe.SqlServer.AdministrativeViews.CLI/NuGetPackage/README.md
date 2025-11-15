@@ -1,7 +1,7 @@
 # SQL Server Administrative Veiws CLI
 The intended use of the CLI tool is to provide **metrics** and **execution plans** for SQL Server queries for Continuous Integration (CI) scenarios as offline interactive report.
 
-It supports SQL Server 2005...2025. 
+It supports SQL Server 2005...2025 including Local DB
 
 
 # UI Highlights
