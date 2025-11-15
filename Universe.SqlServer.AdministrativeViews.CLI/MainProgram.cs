@@ -54,7 +54,7 @@ internal class MainProgram
         List<string> extra = p.Parse(args);
         if (justPrintHelp || args.Length == 0)
         {
-            var ver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            var ver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
             Console.WriteLine($"SQL Server Administrative Views as interactive offline report v{ver}{Environment.NewLine}");
             OptionSet.OptionWidth = 33;
             p.WriteOptionDescriptions(Console.Out);

@@ -15,7 +15,8 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<Description>Visualize queries and execution plans as interactive single-file html report for one or many sql servers. This dotnet tool is built for NET 6.0, 8.0, and 10.0 runtime.</Description>
+		<Description>Visualize queries and execution plans as interactive single-file html report for one or many sql servers. It supports SQL Server 2005 ... SQL Server 2025.</Description>
+        <PackageReadmeFile>NuGetPackage\README.md</PackageReadmeFile>
 	</PropertyGroup>
 
   <PropertyGroup Condition=" $(TargetFramework.Contains('.')) and '$(Configuration)' == 'Release' ">
@@ -25,6 +26,11 @@
       <IsPackable>true</IsPackable>
       <Title>SqlServer Administrative Views</Title>
   </PropertyGroup>
+  	
+  <ItemGroup>
+	  <None Include="NuGetPackage\README.md" Pack="true" PackagePath="NuGetPackage" />
+  </ItemGroup>
+
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>portable</DebugType>
