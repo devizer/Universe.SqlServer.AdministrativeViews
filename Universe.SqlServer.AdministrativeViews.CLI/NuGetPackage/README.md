@@ -36,7 +36,7 @@ SqlServer.AdministrativeViews -o "%SYSTEM_ARTIFACTSDIRECTORY%\\Reports\\{Instanc
 ```
 
 ⇢ ```-o "Reports\{InstanceName}"```
-Write report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed.
+Write report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed. Full path is also allowed. Missing folders will be created.
 
 ⇢ ```--append-version```
 Append instance version to the above file(s) name.
