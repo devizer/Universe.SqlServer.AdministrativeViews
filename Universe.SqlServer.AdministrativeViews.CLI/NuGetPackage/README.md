@@ -6,7 +6,8 @@ UI includes:
 * database filter,
 * columns chooser,
 * execution plan link to SSMS per query,
-* and sql syntax highlighter.
+* sql syntax highlighter,
+* light and dark theme support.
 
 It supports SQL Server 2005...2025.
 This dotnet tool is built for NET 6.0, 8.0, and 10.0 runtime.
