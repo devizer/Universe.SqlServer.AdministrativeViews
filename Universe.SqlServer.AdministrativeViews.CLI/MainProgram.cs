@@ -41,6 +41,7 @@ internal class MainProgram
         bool justPrintHelp = false;
         string outputFile = null;
         bool allLocalServers = false;
+        bool displayVersion = false;
         string csFormat = "Data Source={0}; Integrated Security=SSPI; TrustServerCertificate=true; Encrypt=false";
         OptionSet p = new OptionSet()
             .Add("o=|output=", "Optional 'Reports\\SQL Server' file name", v => outputFile = v)
@@ -48,13 +49,19 @@ internal class MainProgram
             .Add("s=|server=", "Specify local or remote SQL Server instance, allow multiple", v => ConnectionStrings.Add(string.Format(csFormat, v)))
             .Add("cs=|ConnectionString=", "Specify connection string, allow multiple", v => ConnectionStrings.Add(v))
             .Add("all|all-local-servers", "Include all local SQL Servers and all Local DB instances", v => allLocalServers = true)
+            .Add("v|version", "Display version", v => displayVersion = true)
             .Add("h|?|help", v => justPrintHelp = true);
 
         
         List<string> extra = p.Parse(args);
+        var ver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+        if (displayVersion)
+        {
+            Console.WriteLine(ver);
+            return 0;
+        }
         if (justPrintHelp || args.Length == 0)
         {
-            var ver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
             Console.WriteLine($"SQL Server Administrative Views as interactive offline report v{ver}{Environment.NewLine}");
             OptionSet.OptionWidth = 33;
             p.WriteOptionDescriptions(Console.Out);
