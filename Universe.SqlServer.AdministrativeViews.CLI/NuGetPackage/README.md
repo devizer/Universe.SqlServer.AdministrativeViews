@@ -15,11 +15,11 @@ This dotnet tool is built for .NET 6.0, 8.0, and 10.0 runtime.
 To install and configure SQL Server on Azure DevOps pipeline, Github Actions, etc please take a look at powershell module **SqlServer-Version-Management**, https://www.powershellgallery.com/packages/SqlServer-Version-Management
 
 ## Installation
-```dotnet tool install --global SqlServer.AdministrativeViews.CLI```
+```dotnet tool install --global SqlServer.AdministrativeViews```
 
 or 
 
-```dotnet tool update --global SqlServer.AdministrativeViews.CLI```
+```dotnet tool update --global SqlServer.AdministrativeViews```
 
 ## Example
 ```
