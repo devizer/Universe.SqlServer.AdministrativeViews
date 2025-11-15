@@ -2,12 +2,12 @@
 The intended use of the CLI tool is to provide **metrics** and **execution plans** for SQL Server queries for Continuous Integration (CI) scenarios as offline interactive report.
 
 UI includes:
-* metrics sorting,
-* database filter,
-* columns chooser,
-* execution plan link to SSMS per query,
-* sql syntax highlighter,
-* light and dark theme support.
+ • execution plan link to SSMS per query,
+ • sql syntax highlighter,
+ • light and dark theme support,
+ • metrics sorting,
+ • database filter,
+ • columns chooser.
 
 It supports SQL Server 2005...2025.
 This dotnet tool is built for NET 6.0, 8.0, and 10.0 runtime.
