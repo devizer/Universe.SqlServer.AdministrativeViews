@@ -57,7 +57,7 @@
 
   <PropertyGroup>
 	  <OutputType>Exe</OutputType>
-      <PackageId>SqlServer.AdministrativeViews.CLI</PackageId>
+      <PackageId>SqlServer.AdministrativeViews</PackageId>
   </PropertyGroup>
 
 </Project>
