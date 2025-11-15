@@ -34,14 +34,14 @@ SqlServer.AdministrativeViews -o "%SYSTEM_ARTIFACTSDIRECTORY%\\Reports\\{Instanc
 -h, -?, --help
 ```
 
-```--all-local-servers```<br/>
-Include all local sql servers and all Local DB instances. Sql Server Browser service is not required. All instances are discovered by registry and ```SQLLocalDB.exe info``` API.
+```--all-local-servers```
+Include all local sql servers and all Local DB instances. Sql Server Browser service is not required. All instances are discovered by registry and ```SQLLocalDB``` API.
 
-```-s "(local)\SQLEXPRESS"```<br/>
+```-s "(local)\SQLEXPRESS"```
 Include local SQLEXPRESS instance.
 
 ```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"```
-<br/>Include local SQL Server on linux.
+Include local SQL Server on linux.
 
 Parameters ```-s```, ```-cs``` may be included multiple times.
 
