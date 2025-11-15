@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 using Universe.SqlServer.AdministrativeViews.CLI.External;
 using Universe.SqlServer.AdministrativeViews.Exporter;
 using Universe.SqlServer.AdministrativeViews.External;
@@ -43,9 +44,9 @@ internal class MainProgram
         string csFormat = "Data Source={0}; Integrated Security=SSPI; TrustServerCertificate=true; Encrypt=false";
         OptionSet p = new OptionSet()
             .Add("o=|output=", "Optional 'Reports\\SQL Server' file name", v => outputFile = v)
-            .Add("av|append-version", "Append SQL Server version to above file name", v => appendSqlServerVersion = true)
-            .Add("s=|server=", "Specify local or remote SQL Server instance", v => ConnectionStrings.Add(string.Format(csFormat, v)))
-            .Add("cs=|ConnectionString=", "Specify connection string", v => ConnectionStrings.Add(v))
+            .Add("av|append-version", "Append SQL Server version to the above file name", v => appendSqlServerVersion = true)
+            .Add("s=|server=", "Specify local or remote SQL Server instance, allow multiple", v => ConnectionStrings.Add(string.Format(csFormat, v)))
+            .Add("cs=|ConnectionString=", "Specify connection string, allow multiple", v => ConnectionStrings.Add(v))
             .Add("all|all-local-servers", "Include all local SQL Servers and all Local DB instances", v => allLocalServers = true)
             .Add("h|?|help", v => justPrintHelp = true);
 
@@ -53,6 +54,8 @@ internal class MainProgram
         List<string> extra = p.Parse(args);
         if (justPrintHelp || args.Length == 0)
         {
+            var ver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Console.WriteLine($"SQL Server Administrative Views as interactive offline report v{ver}{Environment.NewLine}");
             OptionSet.OptionWidth = 33;
             p.WriteOptionDescriptions(Console.Out);
             return 0;
