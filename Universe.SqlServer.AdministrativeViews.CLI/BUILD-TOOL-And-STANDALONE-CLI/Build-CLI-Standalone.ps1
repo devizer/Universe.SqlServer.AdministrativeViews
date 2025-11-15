@@ -12,6 +12,7 @@ $buildAction = {
   $_ = New-Item -Path "bin\self-contained" -ItemType Directory -ErrorAction SilentlyContinue | out-null
   $_ = New-Item -Path "$tmpFolder" -ItemType Directory -ErrorAction SilentlyContinue | out-null
   & { dotnet.exe publish "/p:Version=$VERSION" "/p:AssemblyVersion=$VERSION" -c Release -f net8.0 --self-contained -r $rid -o "$toFolder" } *| tee "$tmpFolder\build.$rid.log" | out-host
+  if (-not $?) { throw "ERROR: dotnet publish for $rid"; }
   pushd $toFolder
   $archiveName="SqlServer.AdministrativeViews.CLI-$rid"
   if ($rid -like "win*") {
