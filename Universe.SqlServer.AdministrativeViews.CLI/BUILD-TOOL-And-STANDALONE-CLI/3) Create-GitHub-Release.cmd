@@ -4,7 +4,7 @@ for /f %%i in (%BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\PUBLIC\VERSION.TXT) do set
 
 echo SqlServer Administrative Views standalone self-contained release v%VERSION% > %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
 echo.  >> %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
-echo [SqlServer Administrative Views .NET tool]^(https://www.nuget.org/packages/SqlServer.AdministrativeViews^) is also available: >> %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
+echo [SqlServer Administrative Views .NET tool]^(https://www.nuget.org/packages/SqlServer.AdministrativeViews#readme-body-tab^) is also available: >> %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
 echo ``` >> %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
 echo dotnet tool install --global SqlServer.AdministrativeViews >> %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
 echo ``` >> %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt

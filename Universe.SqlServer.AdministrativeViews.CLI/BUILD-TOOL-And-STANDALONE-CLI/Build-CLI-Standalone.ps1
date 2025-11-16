@@ -16,9 +16,9 @@ $buildAction = {
   pushd $toFolder
   $archiveName="SqlServer.AdministrativeViews.CLI-$rid"
   if ($rid -like "win*") {
-    & 7z a -tzip "-xr!*.pdb" "-mx=$COMPRESSION_LEVEL" "..\PUBLIC\$archiveName.zip" * | out-null
+    & 7z a -tzip "-mx=$COMPRESSION_LEVEL" "..\PUBLIC\$archiveName.zip" * | out-null
   } else {
-    & 7z a -ttar "-xr!*.pdb" "$tmpFolder\$archiveName.tar" * | out-null
+    & 7z a -ttar "$tmpFolder\$archiveName.tar" * | out-null
     cd "$tmpFolder"
     $_ = New-Item -Path "..\PUBLIC" -ItemType Directory -ErrorAction SilentlyContinue | out-null
     & 7z a "-tgzip" "-mx=$COMPRESSION_LEVEL" "..\PUBLIC\$archiveName.tar.gz" "$archiveName.tar" | out-null

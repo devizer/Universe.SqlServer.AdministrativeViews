@@ -19,7 +19,7 @@ $buildAction = {
   $_ = New-Item -Path "$toFolder" -ItemType Directory -ErrorAction SilentlyContinue | out-null
   pushd "$fromFolder"
   $archiveName="SqlServer.AdministrativeViews.CLI-$rid"
-  & 7z a -tzip "-xr!*.pdb" "-mx=$COMPRESSION_LEVEL" "$toFolder\$archiveName.zip" * | out-null
+  & 7z a -tzip "-mx=$COMPRESSION_LEVEL" "$toFolder\$archiveName.zip" * | out-null
   Write-All-Text "$toFolder\VERSION.TXT" "$VERSION"
   popd
 }
