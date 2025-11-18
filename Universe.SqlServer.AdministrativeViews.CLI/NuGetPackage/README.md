@@ -14,11 +14,13 @@ It supports SQL Server 2005...2025 including Local DB.
 
 
 ## Installation
-```dotnet tool install --global SqlServer.AdministrativeViews```
-
+```
+dotnet tool install --global SqlServer.AdministrativeViews
+```
 or 
-
-```dotnet tool update --global SqlServer.AdministrativeViews```
+```
+dotnet tool update --global SqlServer.AdministrativeViews
+```
 
 ## Example
 ```
@@ -27,15 +29,20 @@ SqlServer.AdministrativeViews -o "%SYSTEM_ARTIFACTSDIRECTORY%\Reports\{InstanceN
 
 ## Options
 
-```-o "Reports\{InstanceName}"```  ⇢  Write a report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed. Full path is also allowed. Missing folders will be created.
+**```-o "Reports\{InstanceName}"```**  ⇢ 
+Write a report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed. Full path is also allowed. Missing folders will be created.
 
-```--append-version```  ⇢  Append the instance version to the above file(s) name.
+**```--append-version```**  ⇢ 
+Append the instance version to the above file(s) name.
 
-```--all-local-servers```  ⇢  Include all local sql servers and all Local DB instances. Sql Server Browser service is not required. All instances are discovered by registry and SQL Local DB management API.
+**```--all-local-servers```**  ⇢ 
+Include all local sql servers and all Local DB instances. Sql Server Browser service is not required. All instances are discovered by registry and SQL Local DB management API.
 
-```-s "(local)\SQLEXPRESS"```  ⇢  Include local SQLEXPRESS instance.
+**```-s "(local)\SQLEXPRESS"```**  ⇢ 
+Include local SQLEXPRESS instance.
 
-```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"```  ⇢  Include SQL Server on Linux, on a network, or in the cloud.
+**```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"```**  ⇢ 
+Include SQL Server on Linux, on a network, or in the cloud.
 
 Parameters ```-s``` (server instance), ```-cs``` (connection string) may be included multiple times.
 
