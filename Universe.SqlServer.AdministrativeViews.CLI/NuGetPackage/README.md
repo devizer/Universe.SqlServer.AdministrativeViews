@@ -40,10 +40,10 @@ Write a report to a file named as sql server or local db instance in the relativ
 Include all local sql servers and all Local DB instances. Sql Server Browser service is not required. All instances are discovered by registry and SQL Local DB management API.
 
 **```-s "(local)\SQLEXPRESS"```**  ⇢ 
-Include local SQLEXPRESS instance.
+Include local SQLEXPRESS instance.
 
 **```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"```**  ⇢ 
-Include SQL Server on Linux, on a network, or in the cloud.
+Include SQL Server on Linux, on a network, or in the cloud.
 
 Parameters ```-s``` (server instance name), ```-cs``` (connection string) may be included multiple times.
 
