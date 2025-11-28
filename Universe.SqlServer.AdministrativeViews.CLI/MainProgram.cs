@@ -111,7 +111,7 @@ internal class MainProgram
         foreach (var connectionString in ConnectionStrings)
         {
             // already include 'on Windows|Linux'
-            var versionAndPlatform = GetMediumVersion(connectionString);
+            var versionAndPlatform = ValidateConnection(connectionString);
             if (versionAndPlatform == null)
             {
                 errorReturn++;
@@ -247,7 +247,7 @@ internal class MainProgram
         }
     }
 
-    static VersionAndPlatform GetMediumVersion(string connectionString)
+    static VersionAndPlatform ValidateConnection(string connectionString)
     {
         Console.Write($"Validating connection for {GetInstanceName(connectionString)}:");
         try
