@@ -8,7 +8,7 @@ namespace Universe.SqlServer.AdministrativeViews.Tests
         {
             var raw = Environment.GetEnvironmentVariable("SYSTEM_ARTIFACTSDIRECTORY");
             raw = raw ?? Environment.CurrentDirectory;
-            var ret = Path.Combine(Path.GetFullPath(raw), "AdministrativeViews");
+            var ret = Path.Combine(Path.GetFullPath(raw), "Administrative Views (Tests)");
             TryAndForget.Execute(() => Directory.CreateDirectory(ret));
             return ret;
         }, LazyThreadSafetyMode.ExecutionAndPublication);
