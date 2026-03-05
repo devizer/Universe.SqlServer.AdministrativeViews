@@ -1,7 +1,8 @@
 # SQL Server Administrative Veiws CLI
-The intended use of the CLI tool is to provide **metrics** and **execution plans** for SQL Server queries for Continuous Integration (CI) scenarios as offline interactive report.
-
-It supports SQL Server 2005...2025 including Local DB.
+Visualizes SQL Server Administrative Views for **queries**, **metrics**, and **execution plans**.
+Generates a single-file **offline** interactive HTML report for one or multiple SQL Servers.
+Designed for Continuous Integration (CI) scenarios.
+Supports SQL Server 2005...2025 including Local DB.
 
 
 # UI Highlights
@@ -29,7 +30,7 @@ $report = "$($ENV:GITHUB_TEMP)\Reports\{InstanceName} {Version} on {Platform}"
 dotnet dnx SqlServer.AdministrativeViews -- -o $report -all
 ```
 
-GITHUB_TEMP and SYSTEM_ARTIFACTSDIRECTORY are directories that are emptied at the beginning and end of each job on github actions and azure devops.
+GITHUB_TEMP and SYSTEM_ARTIFACTSDIRECTORY are directories that are emptied at the beginning and end of each job on github actions workfkow and azure devops pipeline.
 
 ## Options
 
@@ -48,9 +49,10 @@ Include SQL Server on Linux, on a network, or in the cloud.
 Parameters ```-s``` (server instance name), ```-cs``` (connection string) may be included multiple times.
 
 
-## See also
+## Build Notes
 This dotnet tool is built for .NET 6.0, 8.0, and 10.0 SDK.
 
-Standalone cli tool is also available without .NET SDK: **[github releases](https://github.com/devizer/Universe.SqlServer.AdministrativeViews/releases)** 
+Standalone cli tool is also available without SDK as .NET Core and .NET Framework builds for Windows, Linux, and macOS: **[github releases](https://github.com/devizer/Universe.SqlServer.AdministrativeViews/releases)** 
 
-To install and configure SQL Server on Azure DevOps pipeline, Github Actions Workflow, etc please take a look at powershell **[SqlServer-Version-Management](https://www.powershellgallery.com/packages/SqlServer-Version-Management)** module. 
+## See Also
+To install and configure SQL Server on Azure DevOps pipeline, Github Actions workflow, etc please take a look at powershell **[SqlServer-Version-Management](https://www.powershellgallery.com/packages/SqlServer-Version-Management)** module. 
