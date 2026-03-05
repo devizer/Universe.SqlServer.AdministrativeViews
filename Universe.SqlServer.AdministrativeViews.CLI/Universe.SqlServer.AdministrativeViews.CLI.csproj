@@ -15,7 +15,7 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<Description>Visualize queries and execution plans as interactive single-file html report for one or many sql servers. It supports SQL Server 2005 ... SQL Server 2025.</Description>
+		<Description>Visualize Administrative Views for queries, metrics and execution plans as interactive single-file html report for one or many sql servers. It supports SQL Server 2005 ... SQL Server 2025.</Description>
         <PackageReadmeFile>NuGetPackage\README.md</PackageReadmeFile>
 	</PropertyGroup>
 
