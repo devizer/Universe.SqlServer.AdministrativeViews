@@ -17,9 +17,13 @@ public partial class SqlCacheHtmlExporter
     public SqlQueryStatsSchema ColumnsSchema { get; protected set; }
     public List<SummaryRow> Summary { get; protected set; } // Available after Export
     public List<DatabaseTabRow> DatabaseTabRows { get; protected set; } // Available after Export
+    public ISqlCacheHtmlExporterPredicate ExportPredicate { get; set; } = null;
+
     private JsStringConstants Strings = new JsStringConstants();
 
     private TableHeaderDefinition[] _tableTopHeaders;
+
+
 
 
     public SqlCacheHtmlExporter(DbProviderFactory dbProvider, string connectionString) : this()
@@ -46,7 +50,11 @@ public partial class SqlCacheHtmlExporter
         using (this.LogStep("Query Final 'Query Stat'"))
         {
             QueryCacheReader reader = new QueryCacheReader(DbProvider, ConnectionString);
-            Rows = reader.Read().ToList();
+            // Rows = reader.Read().ToList();
+            var b = DbProvider.CreateConnectionStringBuilder();
+            b.ConnectionString = ConnectionString;
+            var server = b["Data Source"]?.ToString();
+            Rows = reader.Read().Where(row => ExportPredicate == null || ExportPredicate.ShouldExport(server, row)).ToList();
             ColumnsSchema = reader.ColumnsSchema;
         }
 

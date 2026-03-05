@@ -1,4 +1,4 @@
-$PUBLISH_Folder = "W:\Temp\QueryCache.CLI-PUBLISH"
+$PUBLISH_Folder = "P:\Temp\QueryCache.CLI-PUBLISH"
 $VERSION_SHORT = "1.1"
 $NET6_RIDs = @("osx-x64 osx-arm64 win-x64 win-x86 win-arm64 win-arm linux-x64 linux-arm linux-arm64 linux-musl-x64 osx.10.10-x64 osx.10.11-x64".Split(" "))
 $ridIndex = 0;

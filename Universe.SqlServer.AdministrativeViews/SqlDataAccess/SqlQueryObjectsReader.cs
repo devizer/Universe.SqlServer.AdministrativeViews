@@ -9,7 +9,7 @@ public class SqlQueryObjectsReader
     private DbProviderFactory _dbProvider;
     private string _connectionString;
 
-    private static readonly string SqlQuery = @"Select 
+    internal static readonly string SqlQuery = @"Select 
   s.schema_id SchemaId,
   s.name SchemaName,
   o.type_desc ObjectType,

@@ -43,6 +43,8 @@ internal class MainProgram
         string outputFile = null;
         bool allLocalServers = false;
         bool displayVersion = false;
+        bool includeSystemQueries = false;
+        bool includeMasterDatabase = false;
         string csFormat = "Data Source={0}; Integrated Security=SSPI; TrustServerCertificate=true; Encrypt=false";
         OptionSet p = new OptionSet()
             .Add("o=|output=", "Optional 'Reports\\SQL Server' file name", v => outputFile = v)
@@ -50,6 +52,8 @@ internal class MainProgram
             .Add("s=|server=", "Specify local or remote SQL Server instance, allow multiple", v => ConnectionStrings.Add(string.Format(csFormat, v)))
             .Add("cs=|ConnectionString=", "Specify connection string, allow multiple", v => ConnectionStrings.Add(v))
             .Add("all|all-local-servers", "Include all local SQL Servers and all Local DB instances", v => allLocalServers = true)
+            .Add("-include-system-queries", "Include system queries", v => includeSystemQueries = true)
+            .Add("-include-master-database", "Include master database", v => includeMasterDatabase = true)
             .Add("v|version", "Display version", v => displayVersion = true)
             .Add("h|?|help", v => justPrintHelp = true);
 
@@ -124,7 +128,12 @@ internal class MainProgram
             {
                 var instanceName = GetInstanceName(connectionString);
                 var hostPlatform = SqlClientFactory.Instance.CreateConnection(connectionString).Manage().HostPlatform;
-                SqlCacheHtmlExporter e = new SqlCacheHtmlExporter(SqlClientFactory.Instance, connectionString);
+                ISqlCacheHtmlExporterPredicate predicateMaster = includeMasterDatabase ? new AlwaysExportPredicate() : new ExportNonMasterQueriesPredicate();
+                ISqlCacheHtmlExporterPredicate predicateSystem = includeSystemQueries ? new AlwaysExportPredicate() : new ExportNonSystemQueriesPredicate();
+                SqlCacheHtmlExporter e = new SqlCacheHtmlExporter(SqlClientFactory.Instance, connectionString)
+                {
+                    ExportPredicate = new[] { predicateMaster, predicateSystem}.And()
+                };
 
                 if (!string.IsNullOrEmpty(outputFile))
                 {
