@@ -1,7 +1,7 @@
 . ..\Build-Scripts\Build.ps1 
 $COMPRESSION_LEVEL="$($ENV:COMPRESSION_LEVEL)"
 
-$rids="linux-musl-arm linux-musl-arm64 osx-x64 osx-arm64 win-x64 win-x86 win-arm64 linux-x64 linux-arm64 linux-musl-x64".Split(' ')
+$rids="linux-musl-arm linux-musl-arm64 linux-musl-x64 osx-x64 osx-arm64 win-x64 win-x86 win-arm64 linux-arm linux-x64 linux-arm64".Split(' ')
 $rids
 
 $getRidTitle = { "$_" }
