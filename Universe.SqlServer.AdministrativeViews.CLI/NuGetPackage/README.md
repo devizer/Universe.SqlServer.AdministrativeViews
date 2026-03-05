@@ -5,12 +5,12 @@ It supports SQL Server 2005...2025 including Local DB.
 
 
 # UI Highlights
-*  Execution plan link to SSMS per query,
+*  One-click link to execution plan diagram per query,
 *  Sql syntax highlighter,
 *  Light and dark theme support,
 *  Metrics sorting,
 *  Database filter,
-*  Columns chooser.
+*  Column chooser.
 
 
 ## Installation
@@ -26,7 +26,7 @@ SqlServer.AdministrativeViews -o $report -all
 # or 
 
 $report = "$($ENV:GITHUB_TEMP)\Reports\{InstanceName} {Version} on {Platform}"
-dotnet dnx SqlServer.AdministrativeViews -o $report -all
+dotnet dnx SqlServer.AdministrativeViews -- -o $report -all
 ```
 
 GITHUB_TEMP and SYSTEM_ARTIFACTSDIRECTORY are directories that are emptied at the beginning and end of each job on github actions and azure devops.
@@ -53,4 +53,4 @@ This dotnet tool is built for .NET 6.0, 8.0, and 10.0 SDK.
 
 Standalone cli tool is also available without .NET SDK: **[github releases](https://github.com/devizer/Universe.SqlServer.AdministrativeViews/releases)** 
 
-To install and configure SQL Server on Azure DevOps pipeline, Github Actions, etc please take a look at powershell **[SqlServer-Version-Management](https://www.powershellgallery.com/packages/SqlServer-Version-Management)** module. 
+To install and configure SQL Server on Azure DevOps pipeline, Github Actions Workflow, etc please take a look at powershell **[SqlServer-Version-Management](https://www.powershellgallery.com/packages/SqlServer-Version-Management)** module. 
