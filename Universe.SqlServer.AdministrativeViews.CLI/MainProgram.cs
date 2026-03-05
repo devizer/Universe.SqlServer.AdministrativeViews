@@ -100,7 +100,7 @@ internal class MainProgram
             ConnectionStrings.AddRange(onlineServers.Select(x => x.ConnectionString));
         }
         var argPadding = "    ";
-        Console.WriteLine($@"SQL Server Query Cache CLI Arguments:");
+        Console.WriteLine($@"SQL Server Administrative Views CLI Arguments:");
         foreach (var connectionString in ConnectionStrings)
             Console.WriteLine($@"{argPadding}Connection String: {connectionString}");
 
@@ -122,7 +122,7 @@ internal class MainProgram
                 continue;
             };
 
-            Console.Write($"Analyzing Query Cache for {GetInstanceName(connectionString)}:");
+            Console.Write($"Analyzing Queries for {GetInstanceName(connectionString)}:");
             var export1StartAt = Stopwatch.StartNew();
             try
             {
