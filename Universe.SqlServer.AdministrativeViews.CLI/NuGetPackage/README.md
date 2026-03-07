@@ -1,9 +1,8 @@
 # SQL Server Administrative Veiws CLI
-Visualizes SQL Server Administrative Views for **queries**, **metrics**, and **execution plans**.
-Generates a single-file **offline** interactive HTML report for one or multiple SQL Servers.
-Designed for Continuous Integration (CI) scenarios.
-Supports SQL Server 2005...2025 including Local DB.
-
+* Visualizes SQL Server Administrative Views for **queries**, **metrics**, and **execution plans**.
+* Generates a single-file **offline** interactive HTML report for one or multiple SQL Servers.
+* Designed for Continuous Integration (CI) scenarios.
+* Supports SQL Server 2005...2025 including Local DB.
 
 # UI Highlights
 *  One-click link to execution plan diagram per query,
@@ -12,6 +11,8 @@ Supports SQL Server 2005...2025 including Local DB.
 *  Metrics sorting,
 *  Database filter,
 *  Column chooser.
+
+## **[Demo🔗](https://devizer.github.io/SQL-Server-Performance-by-System-Administrative-Views-Demo/)** 
 
 
 ## Installation
