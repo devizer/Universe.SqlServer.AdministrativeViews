@@ -12,6 +12,6 @@ $buildArgs = @(
 # & dotnet @buildArgs
 $dotnet="C:\Apps\dotnet-10\dotnet.exe"
 $dotnet="dotnet.exe"
-& "$$dotnet" build "/p:Version=$VERSION" "/p:AssemblyVersion=$VERSION" "/p:PackageType=DotnetTool" -c Release
+& "$dotnet" build "/p:Version=$VERSION" "/p:AssemblyVersion=$VERSION" "/p:PackageType=DotnetTool" -c Release
 Say "Skip PACK"
 # & dotnet pack "/p:Version=$VERSION" "/p:AssemblyVersion=$VERSION" -c Release -- '/p:TargetFrameworks="net8.0;net6.0"'

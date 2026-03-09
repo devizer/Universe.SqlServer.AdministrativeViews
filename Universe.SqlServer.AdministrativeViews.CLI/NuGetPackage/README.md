@@ -12,7 +12,7 @@
 *  Database filter,
 *  Column chooser.
 
-## **[Demo🔗](https://devizer.github.io/SQL-Server-Performance-by-System-Administrative-Views-Demo/)** 
+## [Demo🔗](https://devizer.github.io/SQL-Server-Performance-by-System-Administrative-Views-Demo/)
 
 
 ## Installation
