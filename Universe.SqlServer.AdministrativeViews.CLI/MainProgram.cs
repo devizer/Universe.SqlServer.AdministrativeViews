@@ -152,6 +152,10 @@ internal class MainProgram
                     e.Export(StreamWriter.Null);
                     var jsonExport = new { SqlServerVersion = versionAndPlatform, Summary = e.Summary, ColumnsSchema = e.ColumnsSchema, Queries = e.Rows };
                     JsonExtensions.ToJsonWriter(consoleOut, jsonExport, false, JsonNaming.CamelCase);
+                    Console.WriteLine($" OK, it took {GetHumanDuration(export1StartAt)}");
+                    var summary = e.Summary;
+                    string summaryReport = SqlSummaryTextExporter.ExportAsText(summary, $"SQL Server {versionAndPlatform}");
+                    Console.WriteLine(summaryReport);
                 }
                 else if (!string.IsNullOrEmpty(outputFile))
                 {

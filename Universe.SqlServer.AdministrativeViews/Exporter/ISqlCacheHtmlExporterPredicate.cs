@@ -67,8 +67,8 @@ public class ExportNonSystemQueriesPredicate : ISqlCacheHtmlExporterPredicate
 
         const string q3a = "AND HAS_DBACCESS(@db_curr) = 1";
         const string q3b = "AND not exists(select * from sys.databases where db_id(@db_curr) = database_id and is_cdc_enabled = 1)";
-        if (sqlCode.IndexOf(q3a, StringComparison.InvariantCultureIgnoreCase) >= 0
-            && sqlCode.IndexOf(q3b, StringComparison.InvariantCultureIgnoreCase) >= 0) return false;
+        if (sqlCode.IndexOf(q3a, StringComparison.OrdinalIgnoreCase) >= 0
+            && sqlCode.IndexOf(q3b, StringComparison.OrdinalIgnoreCase) >= 0) return false;
 
         const string q4 = "if (select value_in_use from sys.configurations where configuration_id =";
         if (sqlCode.IndexOf(q4, StringComparison.OrdinalIgnoreCase) >= 0) return false;
@@ -79,7 +79,7 @@ public class ExportNonSystemQueriesPredicate : ISqlCacheHtmlExporterPredicate
         const string q5d = "db_id() database_id";
         if (sqlCode.IndexOf("\"", StringComparison.OrdinalIgnoreCase) < 0
             && sqlCode.IndexOf("sp_executesql", StringComparison.OrdinalIgnoreCase) < 0
-            && sqlCode.IndexOf("SELECT", StringComparison.InvariantCultureIgnoreCase) >= 0
+            && sqlCode.IndexOf("SELECT", StringComparison.OrdinalIgnoreCase) >= 0
             &&
             (sqlCode.IndexOf(q5a, StringComparison.OrdinalIgnoreCase) >= 0
              || sqlCode.IndexOf(q5b, StringComparison.OrdinalIgnoreCase) >= 0
