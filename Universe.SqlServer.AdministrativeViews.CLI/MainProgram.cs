@@ -49,10 +49,10 @@ internal class MainProgram
         string csFormat = "Data Source={0}; Integrated Security=SSPI; TrustServerCertificate=true; Encrypt=false";
         OptionSet p = new OptionSet()
             .Add("o=|output=", "Optional 'Reports\\SQL Server' file name", v => outputFile = v)
-            .Add("m|McpServer", "MCP Server with stdio interaction protocol", v => isMcpServer = true)
+            .Add("m|mcp-server", "MCP Server with stdio interaction protocol", v => isMcpServer = true)
             .Add("av|append-version", "Append SQL Server version to the above file name", v => appendSqlServerVersion = true)
             .Add("s=|server=", "Specify local or remote SQL Server instance, allow multiple", v => ConnectionStrings.Add(string.Format(csFormat, v)))
-            .Add("cs=|ConnectionString=", "Specify connection string, allow multiple", v => ConnectionStrings.Add(v))
+            .Add("cs=|connection-string=", "Specify connection string, allow multiple", v => ConnectionStrings.Add(v))
             .Add("all|all-local-servers", "Include all local SQL Servers and all Local DB instances", v => allLocalServers = true)
             .Add("-include-system-queries", "Include system queries", v => includeSystemQueries = true)
             .Add("-include-master-database", "Include master database", v => includeMasterDatabase = true)
@@ -112,9 +112,13 @@ internal class MainProgram
             ConnectionStrings.AddRange(onlineServers.Select(x => x.ConnectionString));
         }
         var argPadding = "    ";
-        Console.WriteLine($@"SQL Server Administrative Views CLI Arguments:");
+        if (isMcpServer)
+            Console.WriteLine($@"MCP Server 'SQL Server Administrative Views' Arguments:");
+        else
+            Console.WriteLine($@"SQL Server Administrative Views CLI Arguments:");
+
         foreach (var connectionString in ConnectionStrings)
-            Console.WriteLine($@"{argPadding}Connection String: {connectionString}");
+                Console.WriteLine($@"{argPadding}Connection String: {connectionString}");
 
         if (string.IsNullOrEmpty(outputFile))
             Console.WriteLine($@"{argPadding}Output File argument is missing. Results will not be stored");
