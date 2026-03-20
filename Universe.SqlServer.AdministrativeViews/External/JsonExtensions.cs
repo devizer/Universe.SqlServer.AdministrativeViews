@@ -32,7 +32,19 @@ namespace Universe.SqlServer.AdministrativeViews.External
             return json.ToString();
         }
 
-        // prev version for small objects for Desktop Settings
+        public static void ToJsonWriter(TextWriter textWriter, object arg, bool minify = false, JsonNaming namingStrategy = JsonNaming.CamelCase)
+        {
+            var ser = CreateJsonSerializer(minify, namingStrategy);
+            try
+            {
+                ser.Serialize(textWriter, arg);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Unable to serialize object [{arg?.GetType()}] to text writer \"{textWriter?.GetType()}\". {ex.GetExceptionDigest()}", ex);
+            }
+        }
+
         public static void ToJsonFile(string path, object arg, bool minify = false, JsonNaming namingStrategy = JsonNaming.CamelCase)
         {
             var ser = CreateJsonSerializer(minify, namingStrategy);

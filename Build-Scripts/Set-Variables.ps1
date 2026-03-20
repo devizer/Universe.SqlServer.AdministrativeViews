@@ -1,1 +1,1 @@
-$BASEVER="1.0"
+$BASEVER="1.1"

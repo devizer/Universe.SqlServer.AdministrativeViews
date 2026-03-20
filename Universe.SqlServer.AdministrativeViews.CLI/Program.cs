@@ -14,7 +14,7 @@ public class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"SQL Server Query Cache CLI Error{Environment.NewLine}{ex.GetExceptionDigest()}");
+            Console.Error.WriteLine($"SQL Server Administrative Views CLI Error{Environment.NewLine}{ex.GetExceptionDigest()}");
             return 42;
         }
     }

@@ -45,9 +45,11 @@ internal class MainProgram
         bool displayVersion = false;
         bool includeSystemQueries = false;
         bool includeMasterDatabase = false;
+        bool isMcpServer = false;
         string csFormat = "Data Source={0}; Integrated Security=SSPI; TrustServerCertificate=true; Encrypt=false";
         OptionSet p = new OptionSet()
             .Add("o=|output=", "Optional 'Reports\\SQL Server' file name", v => outputFile = v)
+            .Add("m|McpServer", "MCP Server with stdio interaction protocol", v => isMcpServer = true)
             .Add("av|append-version", "Append SQL Server version to the above file name", v => appendSqlServerVersion = true)
             .Add("s=|server=", "Specify local or remote SQL Server instance, allow multiple", v => ConnectionStrings.Add(string.Format(csFormat, v)))
             .Add("cs=|ConnectionString=", "Specify connection string, allow multiple", v => ConnectionStrings.Add(v))
@@ -57,8 +59,15 @@ internal class MainProgram
             .Add("v|version", "Display version", v => displayVersion = true)
             .Add("h|?|help", v => justPrintHelp = true);
 
-        
         List<string> extra = p.Parse(args);
+
+        var consoleOut = Console.Out;
+        var consoleError = Console.Error;
+        if (isMcpServer)
+        {
+            Console.SetOut(consoleError);
+        }
+
         var ver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
         if (displayVersion)
         {
@@ -70,6 +79,9 @@ internal class MainProgram
             Console.WriteLine($"SQL Server Administrative Views as interactive offline report v{ver}{Environment.NewLine}");
             OptionSet.OptionWidth = 33;
             p.WriteOptionDescriptions(Console.Out);
+            Console.WriteLine();
+            Console.WriteLine("Output file name and/or path (-o|--output) may include placeholders: {InstanceName}, {Version}, and {Platform}");
+            Console.WriteLine("Instance (-s|--server) and Connection String (-cs|--ConnectionString) parameters may be included multiple times");
             return 0;
         }
 
@@ -135,9 +147,15 @@ internal class MainProgram
                     ExportPredicate = new[] { predicateMaster, predicateSystem}.And()
                 };
 
-                if (!string.IsNullOrEmpty(outputFile))
+                if (isMcpServer)
                 {
-                    // Does not supported by net framework
+                    e.Export(StreamWriter.Null);
+                    var jsonExport = new { SqlServerVersion = versionAndPlatform, Summary = e.Summary, ColumnsSchema = e.ColumnsSchema, Queries = e.Rows };
+                    JsonExtensions.ToJsonWriter(consoleOut, jsonExport, false, JsonNaming.CamelCase);
+                }
+                else if (!string.IsNullOrEmpty(outputFile))
+                {
+                    // Is not supported by net framework
                     // var realOutputFile = outputFile.Replace("{InstanceName}", SafeFileName.Get(instanceName), StringComparison.OrdinalIgnoreCase);
                     var realOutputFile = outputFile.ReplaceCore("{InstanceName}", SafeFileName.Get(instanceName), StringComparison.OrdinalIgnoreCase);
                     realOutputFile = realOutputFile.ReplaceCore("{Version}", "v" + SafeFileName.Get(versionAndPlatform.MediumVersion), StringComparison.OrdinalIgnoreCase);

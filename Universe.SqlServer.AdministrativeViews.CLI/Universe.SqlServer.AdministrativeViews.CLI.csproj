@@ -44,10 +44,12 @@
     <Compile Remove="Query Cache Reports\**" />
     <EmbeddedResource Remove="Query Cache Reports\**" />
     <None Remove="Query Cache Reports\**" />
-    <Content Remove="Administrative View\**\*" />
-    <Compile Remove="Administrative View\**\*" />
-    <EmbeddedResource Remove="Administrative View\**\*" />
-    <None Remove="Administrative View\**\*" />
+
+    <Content Remove="Administrative View*\**\*" />
+    <Compile Remove="Administrative View*\**\*" />
+    <EmbeddedResource Remove="Administrative View*\**\*" />
+    <None Remove="Administrative View*\**\*" />
+
     <Content Remove="SystemViewsReports\**\*" />
     <Compile Remove="SystemViewsReports\**\*" />
     <EmbeddedResource Remove="SystemViewsReports\**\*" />
