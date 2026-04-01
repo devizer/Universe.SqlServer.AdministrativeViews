@@ -1,5 +1,5 @@
-﻿using System.Data.Common;
-using Dapper;
+﻿using System.Data;
+using System.Data.Common;
 using Universe.SqlServer.AdministrativeViews.External;
 
 namespace Universe.SqlServer.AdministrativeViews.SqlDataAccess;
@@ -33,7 +33,7 @@ public class QueryCacheReader
         var now = DateTime.Now;
         var sqlServerQueryCache = TheQueryCacheQueryV3.SqlServerQueryCache;
         sqlServerQueryCache = new TheQueryCacheQueryV4(ColumnsSchema).GetSqlQuery();
-        var ret = con.Query<QueryCacheRow>(sqlServerQueryCache, null).ToList();
+        var ret = con.Query<QueryCacheRow>(sqlServerQueryCache, null, commandTimeout: 120).ToList();
         foreach (var row in ret)
             row.Lifetime = now - row.CreationTime;
 
