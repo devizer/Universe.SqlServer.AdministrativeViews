@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Universe.SqlServer.AdministrativeViews.McpServer/Universe.SqlServer.AdministrativeViews.McpServer.csproj" />
+  <Project Path="Universe.SqlServer.AdministrativeViews/Universe.SqlServer.AdministrativeViews.csproj" />
+  <Project Path="Universe.SqlServer.AdministrativeViews.Tests/Universe.SqlServer.AdministrativeViews.Tests.csproj" />
+  <Project Path="Universe.SqlServer.AdministrativeViews.CLI\Universe.SqlServer.AdministrativeViews.CLI.csproj" />
+</Solution>

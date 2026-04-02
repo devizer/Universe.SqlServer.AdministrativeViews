@@ -49,7 +49,6 @@ internal class MainProgram
         string csFormat = "Data Source={0}; Integrated Security=SSPI; TrustServerCertificate=true; Encrypt=false";
         OptionSet p = new OptionSet()
             .Add("o=|output=", "Optional 'Reports\\SQL Server' file name", v => outputFile = v)
-            .Add("m|mcp-server", "MCP Server with stdio interaction protocol", v => isMcpServer = true)
             .Add("av|append-version", "Append SQL Server version to the above file name", v => appendSqlServerVersion = true)
             .Add("s=|server=", "Specify local or remote SQL Server instance, allow multiple", v => ConnectionStrings.Add(string.Format(csFormat, v)))
             .Add("cs=|connection-string=", "Specify connection string, allow multiple", v => ConnectionStrings.Add(v))
