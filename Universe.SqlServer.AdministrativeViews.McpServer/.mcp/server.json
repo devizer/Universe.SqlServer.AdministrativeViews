@@ -1,13 +1,13 @@
-{
+﻿{
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
   "description": "Provides access to queries, metrics and execution plans of SQL Servers",
   "name": "io.github.devizer.sqlserver.administrativeviews",
-  "version": "0.2.0",
+  "version": "1.1.300",
   "packages": [
     {
       "registryType": "nuget",
       "identifier": "SqlServer.AdministrativeViews.McpServer",
-      "version": "0.2.0",
+      "version": "1.1.300",
       "transport": {
         "type": "stdio"
       },
