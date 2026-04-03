@@ -53,7 +53,7 @@
     <PackageReference Include="Universe.GenericTreeTable" Version="1.2.15" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Universe.SqlServerJam" Version="2.1.1184" />
+    <PackageReference Include="Universe.SqlServerJam" Version="2.1.1185" />
   </ItemGroup>
 
 </Project>

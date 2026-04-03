@@ -37,7 +37,7 @@ namespace Universe.SqlServer.AdministrativeViews.McpServer.Tools
         // [Conditional("DEBUG")]
         public void AddLogArtifact(string artifactName, string content)
         {
-            var fullName = Path.Combine(LogFolder, _AppStartedAt.ToString("yyyy-MM-dd HH꞉mm꞉ss") + " " + ActionTitle + " " + artifactName);
+            var fullName = Path.Combine(LogFolder, _AppStartedAt.ToString("yyyy-MM-dd HH꞉mm꞉ss"),  $"{Counter} " + ActionTitle + " " + artifactName);
             CreateDirectoryIfNotExists(Path.GetDirectoryName(fullName));
 
             using FileStream fs = new FileStream(fullName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);

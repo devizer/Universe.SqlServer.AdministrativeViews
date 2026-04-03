@@ -62,7 +62,7 @@
 
   <ItemGroup>
     <PackageReference Include="Universe.CpuUsage" Version="2.2.778.893" />
-    <PackageReference Include="Universe.SqlServerJam" Version="2.1.1184" />
+    <PackageReference Include="Universe.SqlServerJam" Version="2.1.1185" />
   </ItemGroup>
 
   <PropertyGroup>
