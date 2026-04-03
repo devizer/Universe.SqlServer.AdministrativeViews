@@ -33,7 +33,7 @@ internal class SqlServerAdministrativeViewsMcpServer
 Duration and CPU Time are measured in microseconds.
 Columns of CPU Time are suffixed with WorkerTime for result collection, but corresponding sortBy parameter is either 'Avg CPU Time' or 'Total CPU Time'.")]
     public List<QueryCacheRow> Get_Queries_With_Execution_Plan_and_Metrics(
-        [Description("Should be used as parameter value of the ServerInstance property returned by GetOnlineSqlServers. For example '(local)', or '(local)\\SQLEXPRESS'")]
+        [Description("Should be used as parameter value of the ServerInstance property returned by Get_Online_Sql_Servers. For example '(local)', or '(local)\\SQLEXPRESS'")]
         string sql_server_or_localdb_instance,
         [Description("Optional database name, if omitted get ordered queries of any database")]
         string optional_database,
@@ -139,7 +139,7 @@ Azure SQL, SQL Server on the network or in a container can be added using enviro
     )
     {
         timeoutSeconds = Math.Max(1, timeoutSeconds);
-        DebuggerLog debuggerLog = new DebuggerLog("GetOnlineSqlServers");
+        DebuggerLog debuggerLog = new DebuggerLog("Get_Online_Sql_Servers");
         debuggerLog.AddJsonLogArtifact("Arguments", new { timeoutSeconds });
 
         var onlineServers = GetOnlineSqlServerReferences();
