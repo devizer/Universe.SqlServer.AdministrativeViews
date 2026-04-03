@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using Universe.SqlServer.AdministrativeViews.Exporter;
+using Universe.SqlServer.AdministrativeViews.External;
 using Universe.SqlServer.AdministrativeViews.SqlDataAccess;
 using Universe.SqlServerJam;
 
@@ -132,13 +133,17 @@ Currently {onlineSqlServers.Count()} online SQL Servers available: {string.Join(
     [Description(@"Get List of Online Local SQL Servers and Local DB Servers.
 If SQL Server is not running it is not returned. SQL Browser Service is not invoked by this tool, because local registry is only source of SQL Servers.
 Azure SQL, SQL Server on the network or in a container can be added using environment variable SQLSERVER_WELLKNOWN_***.")]
-    public List<SqlServerDto> GetOnlineSqlServers(
+    public List<SqlServerDto> Get_Online_Sql_Servers(
         [Description("Timeout to validate connectivity of SQL Server instance in seconds")]
         int timeoutSeconds = 30
     )
     {
         timeoutSeconds = Math.Max(1, timeoutSeconds);
+        DebuggerLog debuggerLog = new DebuggerLog("GetOnlineSqlServers");
+        debuggerLog.AddJsonLogArtifact("Arguments", new { timeoutSeconds });
+
         var onlineServers = GetOnlineSqlServerReferences();
+        debuggerLog.AddJsonLogArtifact("Online Server Refs", new { onlineServers });
 
         ConcurrentBag<SqlServerDto> ret = new ConcurrentBag<SqlServerDto>();
         Parallel.ForEach(onlineServers, sqlRef =>
@@ -151,7 +156,7 @@ Azure SQL, SQL Server on the network or in a container can be added using enviro
             }
             catch (Exception ex)
             {
-                _Logger.LogWarning($"SQL Server is expected online, but it does not respond: [{sqlRef}]");
+                _Logger.LogWarning($"SQL Server is expected online, but it does not respond: [{sqlRef}]. {ex.GetExceptionDigest()}");
             }
 
             if (shortServerVersion != null)
@@ -167,7 +172,9 @@ Azure SQL, SQL Server on the network or in a container can be added using enviro
             }
         });
 
-        return ret.ToList();
+        var materializedRet = ret.ToList();
+        debuggerLog.AddJsonLogArtifact("Result", materializedRet);
+        return materializedRet;
     }
 
     private static SqlServerRef[] GetOnlineSqlServerReferences()

@@ -30,14 +30,13 @@ This tool is also available for CI on ethemerial build agents as CLI tool:
 
 ## Build info
 The MCP server is built as a self-contained application and does not require the .NET runtime to be installed on targets:
-* `win-x64`
-* `win-arm64`
-* `osx-arm64`
-* `linux-x64`
-* `linux-arm64`
-* `linux-musl-x64`
-
-See [aka.ms/nuget/mcp/guide](https://aka.ms/nuget/mcp/guide) for the full guide.
+* win-x64
+* win-arm64
+* osx-arm64
+* osx-x64
+* linux-x64
+* linux-arm64
+* linux-musl-x64
 
 ## Developing locally
 
@@ -64,12 +63,22 @@ Refer to the VS Code or Visual Studio documentation for more information on conf
 - [Use MCP servers in VS Code (Preview)](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
 - [Use MCP servers in Visual Studio (Preview)](https://learn.microsoft.com/visualstudio/ide/mcp-servers)
 
+
 ## Using the MCP Server from NuGet.org
 
 Once the MCP server package is published to NuGet.org, you can configure it in your preferred IDE. Both VS Code and Visual Studio use the `dnx` command to download and install the MCP server package from NuGet.org.
 
 - **VS Code**: Create a `<WORKSPACE DIRECTORY>/.vscode/mcp.json` file
 - **Visual Studio**: Create a `<SOLUTION DIRECTORY>\.mcp.json` file
+- **Claude**: [Add local mcp server](https://code.claude.com/docs/en/mcp#option-3-add-a-local-stdio-server)
+
+Example
+```
+:: Windows
+claude mcp add --transport stdio local-sql-servers -- cmd /c dnx SqlServer.AdministrativeViews.McpServer --yes
+# Linux and MAC
+claude mcp add --transport stdio --env SQLSERVER_WELLKNOWN_1="<Connection String>" local-sql-servers -- dnx SqlServer.AdministrativeViews.McpServer --yes
+``
 
 For both VS Code and Visual Studio, the configuration file uses the following server definition:
 

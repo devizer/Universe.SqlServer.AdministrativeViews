@@ -27,21 +27,14 @@ namespace Universe.SqlServer.AdministrativeViews.McpServer.Tools
             Counter = Interlocked.Increment(ref Counter);
         }
 
-        [Conditional("DEBUG")]
+        // [Conditional("DEBUG")]
         public void AddJsonLogArtifact(string artifactName, object content)
         {
             string json = JsonConvert.SerializeObject(content, SerializerSettings);
             AddLogArtifact(artifactName, json);
         }
 
-        private static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Include,
-            MaxDepth = 128,
-            Formatting = Formatting.Indented,
-        };
-
-        [Conditional("DEBUG")]
+        // [Conditional("DEBUG")]
         public void AddLogArtifact(string artifactName, string content)
         {
             var fullName = Path.Combine(LogFolder, _AppStartedAt.ToString("yyyy-MM-dd HH꞉mm꞉ss") + " " + ActionTitle + " " + artifactName);
@@ -73,5 +66,14 @@ namespace Universe.SqlServer.AdministrativeViews.McpServer.Tools
 
             return folder;
         }
+
+        private static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Include,
+            MaxDepth = 128,
+            Formatting = Formatting.Indented,
+        };
+
+
     }
 }

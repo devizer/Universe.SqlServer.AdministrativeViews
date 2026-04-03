@@ -3,12 +3,13 @@ del bin/*
 
 $serverJsonPath = "..\.mcp\server.json"
 
-
 # Using --arg to safely pass $VERSION and 'walk' for 1.6+ compatibility
-& jq --arg ver "$VERSION" '.version = $ver' $serverJsonPath | Out-File "$serverJsonPath.1.tmp" -Encoding UTF8
+$json1 = jq --arg ver "$VERSION" '.version = $ver' $serverJsonPath
 $exitCode1 = $Global:LASTEXITCODE
-& jq --arg ver "$VERSION" '.packages[0].version = $ver' "$serverJsonPath.1.tmp" | Out-File "$serverJsonPath.2.tmp" -Encoding UTF8
+[System.IO.File]::WriteAllLines("$serverJsonPath.1.tmp", $json1)
+$json2 = jq --arg ver "$VERSION" '.packages[0].version = $ver' "$serverJsonPath.1.tmp"
 $exitCode2 = $Global:LASTEXITCODE
+[System.IO.File]::WriteAllLines("$serverJsonPath.2.tmp", $json1)
 
 
 if ($exitCode1 -eq 0 -and $exitCode2 -eq 0) {
