@@ -172,7 +172,7 @@ Azure SQL, SQL Server on the network or in a container can be added using enviro
             }
         });
 
-        var materializedRet = ret.ToList();
+        var materializedRet = ret.ToList().OrderByDescending(x => x.Version).ThenByDescending(x => x.Version).ToList();
         debuggerLog.AddJsonLogArtifact("Result", materializedRet);
         return materializedRet;
     }
