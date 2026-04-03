@@ -24,7 +24,7 @@
     <PackageVersion>0.2.0</PackageVersion>
     <PackageTags>SQL Server; Administrative Views; AI; MCP; server; stdio</PackageTags>
     <Authors>devizer</Authors>
-    <Description>Provides access to queries, metrics and execution plans of SQL Servers.</Description>
+    <Description>Provides access to queries, metrics and execution plans of SQL Servers. Supports SQL Server 2005 ... 2025, including LocalDB</Description>
   </PropertyGroup>
 
   <!-- Include additional files for browsing the MCP server. -->
@@ -32,6 +32,7 @@
     <None Include=".mcp\server.json" Pack="true" PackagePath="/.mcp/" />
     <None Include="README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
@@ -41,5 +42,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Universe.SqlServer.AdministrativeViews\Universe.SqlServer.AdministrativeViews.csproj" />
   </ItemGroup>
+
+  <!-- ICON -->
+  <PropertyGroup>
+    <PackageIcon>Icon-V2.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Icon\Icon-V2.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
 
 </Project>
