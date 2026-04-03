@@ -47,12 +47,39 @@ namespace Universe.SqlServer.AdministrativeViews.McpServer.Tools
 
         private static Lazy<string> _LogFolder = new(() =>
         {
-            var pathBinaries = Path.GetDirectoryName(Path.GetFullPath(Assembly.GetExecutingAssembly().Location));
-            var ret = Path.Combine(pathBinaries, $"{AppName}.Traces");
+            string tracesFolder = GetTracesRoot();
+            var ret = Path.Combine(tracesFolder, $"{AppName}.Traces");
             CreateDirectoryIfNotExists(ret);
             Console.Error.WriteLine($"{nameof(DebuggerLog)} folder is {ret}");
             return ret;
         });
+
+        static string GetTracesRoot()
+        {
+            var assemblyFullPath = Assembly.GetExecutingAssembly()?.Location;
+
+            string tracesFolder = null;
+            if (!string.IsNullOrEmpty(assemblyFullPath))
+            {
+                tracesFolder = Path.GetDirectoryName(Path.GetFullPath(assemblyFullPath));
+                return tracesFolder;
+            }
+
+            if (CrossInfo.ThePlatform == CrossInfo.Platform.Windows)
+            {
+                var localAppData = Environment.GetEnvironmentVariable("LOCALAPPDATA");
+                if (!string.IsNullOrEmpty(localAppData) && Directory.Exists(localAppData)) return localAppData;
+                var appData = Environment.GetEnvironmentVariable("APPDATA");
+                if (!string.IsNullOrEmpty(appData) && Directory.Exists(appData)) return appData;
+            }
+            else
+            {
+                var home = Environment.GetEnvironmentVariable("HOME");
+                if (!string.IsNullOrEmpty(home) && Directory.Exists(home)) return home;
+            }
+
+            return Path.DirectorySeparatorChar + "tmp";
+        }
 
         private static string CreateDirectoryIfNotExists(string folder)
         {
