@@ -5,6 +5,9 @@ using Universe.SqlServer.AdministrativeViews.McpServer.Tools;
 
 var builder = Host.CreateApplicationBuilder(args);
 
+
+
+// Does not work
 Environment.SetEnvironmentVariable("NO_COLOR", "1");
 
 // Configure all logs to go to stderr (stdout is used for the MCP protocol messages).
@@ -15,5 +18,9 @@ builder.Services
     .AddMcpServer()
     .WithStdioServerTransport()
     .WithTools<SqlServerAdministrativeViewsMcpServer>();
+
+IReadOnlyCollection<RemoteSqlServerArgument> remoteSqlServerArguments = RemoteSqlServerArgumentParser.Parse(args);
+builder.Services.AddSingleton<IReadOnlyCollection<RemoteSqlServerArgument>>(provider => remoteSqlServerArguments);
+
 
 await builder.Build().RunAsync();

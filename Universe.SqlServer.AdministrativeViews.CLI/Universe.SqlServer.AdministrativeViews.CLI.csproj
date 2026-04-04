@@ -70,4 +70,9 @@
       <PackageId>SqlServer.AdministrativeViews</PackageId>
   </PropertyGroup>
 
+  <ItemGroup>
+     <Compile Include="..\Shared-Files\NDesk.Options.cs" Link="External-Links\NDesk.Options.cs" />
+  </ItemGroup>
+
+
 </Project>

@@ -16,6 +16,7 @@ namespace Universe.SqlServer.AdministrativeViews.McpServer.Tools;
 [Description("Provides access to queries, metrics and execution plans of SQL Servers and SQL Local DB instances.")]
 internal class SqlServerAdministrativeViewsMcpServer
 {
+    IReadOnlyCollection<RemoteSqlServerArgument> _RemoteSqlServerArguments;
     private ILogger<SqlServerAdministrativeViewsMcpServer> _Logger;
 
     static SqlServerAdministrativeViewsMcpServer()
@@ -23,8 +24,9 @@ internal class SqlServerAdministrativeViewsMcpServer
         DebuggerLog.AppName = "SqlServer.AdministrativeViews";
     }
 
-    public SqlServerAdministrativeViewsMcpServer(ILogger<SqlServerAdministrativeViewsMcpServer> logger)
+    public SqlServerAdministrativeViewsMcpServer(IReadOnlyCollection<RemoteSqlServerArgument> remoteSqlServerArguments, ILogger<SqlServerAdministrativeViewsMcpServer> logger)
     {
+        _RemoteSqlServerArguments = remoteSqlServerArguments;
         _Logger = logger;
     }
 
@@ -130,7 +132,7 @@ Currently {onlineSqlServers.Count()} online SQL Servers available: {string.Join(
 
 
     [McpServerTool]
-    [Description(@"Get List of Online Local SQL Servers and Local DB Servers.
+    [Description(@"Get List of Online Local and Remote SQL Servers and Local DB Servers.
 If SQL Server is not running it is not returned. SQL Browser Service is not invoked by this tool, because local registry is only source of SQL Servers.
 Azure SQL, SQL Server on the network or in a container can be added using environment variable SQLSERVER_WELLKNOWN_***.")]
     public List<SqlServerDto> Get_Online_Sql_Servers(
@@ -145,8 +147,18 @@ Azure SQL, SQL Server on the network or in a container can be added using enviro
         var onlineServers = GetOnlineSqlServerReferences();
         debuggerLog.AddJsonLogArtifact("Online Server Refs", new { onlineServers });
 
+        List<SqlServerRef> remoteServers = _RemoteSqlServerArguments.Select(x => new SqlServerRef()
+        {
+            Kind = SqlServerDiscoverySource.WellKnown,
+            Version = null,
+            InstallerVersion = null,
+            Data = x.ConnectionString
+        }).ToList();
+
+        var allServers = onlineServers.Concat(remoteServers).ToArray();
+
         ConcurrentBag<SqlServerDto> ret = new ConcurrentBag<SqlServerDto>();
-        Parallel.ForEach(onlineServers, sqlRef =>
+        Parallel.ForEach(allServers, sqlRef =>
         {
             var man = sqlRef.CreateConnection().Manage();
             Version shortServerVersion = null;
@@ -161,13 +173,15 @@ Azure SQL, SQL Server on the network or in a container can be added using enviro
 
             if (shortServerVersion != null)
             {
-                var mediumVersion = man.ServerTitle;
+                var serverTitle = man.ServerTitle;
+                var alias = _RemoteSqlServerArguments.FirstOrDefault(x => x.ConnectionString == sqlRef.ConnectionString)?.Alias;
                 ret.Add(new SqlServerDto()
                 {
+                    Alias = alias,
                     InstallerVersion = sqlRef.InstallerVersion,
-                    Kind = sqlRef.Kind.ToString().Replace("LocalDB", "LocalDB"),
+                    Kind = sqlRef.Kind.ToString().Replace("LocalDB", "LocalDB").Replace("WellKnown", "Remote"),
                     ServerInstance = sqlRef.DataSource,
-                    Version = mediumVersion
+                    Version = serverTitle
                 });
             }
         });

@@ -52,5 +52,8 @@
     <None Include="Icon\Icon-V2.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
+  <ItemGroup>
+     <Compile Include="..\Shared-Files\NDesk.Options.cs" Link="External-Links\NDesk.Options.cs" />
+  </ItemGroup>
 
 </Project>
