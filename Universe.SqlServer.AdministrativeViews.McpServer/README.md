@@ -2,7 +2,7 @@
 
 ## Prompt 
 
-**List top 12 heaviest queries on SQL Server '(local)' of any database (or 'database AdventureWorks') ordered by average | cumulative IO reads. Explain execution plan, find potential problems with performance and scalability, suggest resolutions,  and highlight recommendations by engine.**
+**List top 12 heaviest queries on SQL Server '(local)' of any database (or 'database AdventureWorks') ordered by average | cumulative IO reads. Explain execution plan, find potential problems with performance and scalability, suggest resolutions, and highlight recommendations by engine.**
 
 ## Supported sorting 
 

@@ -86,6 +86,15 @@ public class ExportNonSystemQueriesPredicate : ISqlCacheHtmlExporterPredicate
              || sqlCode.IndexOf(q5c, StringComparison.OrdinalIgnoreCase) >= 0
              || sqlCode.IndexOf(q5d, StringComparison.OrdinalIgnoreCase) >= 0)) return false;
 
+        const string q6a = "SELECT ";
+        const string q6b = " FROM ::fn_trace_gettable (@file, -1)";
+        if (sqlCode.IndexOf(q6a, StringComparison.OrdinalIgnoreCase) >= 0
+            && sqlCode.IndexOf(q6b, StringComparison.OrdinalIgnoreCase) >= 0
+           ) return false;
+
+        const string q7 = @"SELECT Sum(Duration), Sum(CPU), Sum(Reads), Sum(Writes), Sum(RowCounts), Count(Duration) FROM ::fn_trace_gettable (@file, -1) Where EventClass In (10,12)";
+        if (sqlCode.IndexOf(q7, StringComparison.OrdinalIgnoreCase) >= 0) return false;
+
         return true;
     }
 }
