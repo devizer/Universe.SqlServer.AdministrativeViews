@@ -33,7 +33,8 @@ internal class SqlServerAdministrativeViewsMcpServer
     [McpServerTool]
     [Description(@"Get queries with execution plan and metrics for specified SQL Server or LocalDB instance.
 Duration and CPU Time are measured in microseconds.
-Columns of CPU Time are suffixed with WorkerTime for result collection, but corresponding sortBy parameter is either 'Avg CPU Time' or 'Total CPU Time'.")]
+Columns of CPU Time are suffixed with WorkerTime for result collection, but corresponding sortBy parameter is either 'Avg CPU Time' or 'Total CPU Time'.
+Avoid system query visualization unless specified explicitly.")]
     public List<QueryCacheRow> Get_Queries_With_Execution_Plan_and_Metrics(
         [Description("Should be used as parameter value of the ServerInstance property returned by Get_Online_Sql_Servers. For example '(local)', or '(local)\\SQLEXPRESS'")]
         string sql_server_or_localdb_instance,
