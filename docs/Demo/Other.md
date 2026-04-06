@@ -1,0 +1,1 @@
+**_List top 5 heaviest queries on SQL Server '(local)' of any database (or 'database AdventureWorks') ordered by average | cumulative IO reads. Explain execution plan, find potential problems with performance and scalability, suggest resolutions, and highlight recommendations by engine._**
