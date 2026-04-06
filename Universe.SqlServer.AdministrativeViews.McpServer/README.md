@@ -1,17 +1,13 @@
-# SQL Server Queries with metrics and execition plans MCP Server
+# SQL Server Queries with metrics and execition plan MCP Server
 
 ## Prompts
 
 
-**List top 5 heaviest queries on SQL Server '(local)' of any database (or 'database AdventureWorks') ordered by average | cumulative IO reads. Explain execution plan, find potential problems with performance and scalability, suggest resolutions, and highlight recommendations by engine.**
+**_List top 5 heaviest queries on SQL Server '(local)' of any database (or 'database AdventureWorks') ordered by average | cumulative IO reads. Explain execution plan, find potential problems with performance and scalability, suggest resolutions, and highlight recommendations by engine._**
 
+**_Top 3 slowest queries with metrics and execution plan on local sql server '(local)' for database 'Adventureworks2014'_**
 
-**Top 3 slowest queries with metrics and execution plan on local sql server '(local)' for database 'Adventureworks2014'**
-
-
-
-
-
+![Top Slowest Queries AI Analysis](https://devizer.github.io/Universe.SqlServer.AdministrativeViews/Demo/Top-Slowest-Queries-AI-Analysis.png)
 
 
 
@@ -110,6 +106,7 @@ For both VS Code and Visual Studio, the configuration file uses the following se
 
 ### Non-local SQL Server with alias
 ```
+{
   "mcpServers": {
     "SQL Servers": {
       "command": "cmd",
@@ -126,6 +123,7 @@ For both VS Code and Visual Studio, the configuration file uses the following se
       ]
     }
   }
+}
 ```
 
 Parameters --alias (-a) and --connection-string (-cs) can be specified multiple times.
