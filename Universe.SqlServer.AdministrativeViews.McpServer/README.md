@@ -1,8 +1,19 @@
 # SQL Server Queries with metrics and execition plans MCP Server
 
-## Prompt 
+## Prompts
 
-**List top 12 heaviest queries on SQL Server '(local)' of any database (or 'database AdventureWorks') ordered by average | cumulative IO reads. Explain execution plan, find potential problems with performance and scalability, suggest resolutions, and highlight recommendations by engine.**
+
+**List top 5 heaviest queries on SQL Server '(local)' of any database (or 'database AdventureWorks') ordered by average | cumulative IO reads. Explain execution plan, find potential problems with performance and scalability, suggest resolutions, and highlight recommendations by engine.**
+
+
+**Top 3 slowest queries with metrics and execution plan on local sql server '(local)' for database 'Adventureworks2014'**
+
+
+
+
+
+
+
 
 ## Supported sorting 
 
@@ -23,7 +34,7 @@
 
 ## AI-Free CLI
 
-This tool is also available for CI on ethemerial build agents as CLI tool:
+This tool is also available for CI build agents as CLI tool:
 
 [https://www.nuget.org/packages/SqlServer.AdministrativeViews](https://www.nuget.org/packages/SqlServer.AdministrativeViews#readme-body-tab)
 
@@ -78,7 +89,7 @@ Example
 claude mcp add --transport stdio local-sql-servers -- cmd /c dnx SqlServer.AdministrativeViews.McpServer --yes
 # Linux and MAC
 claude mcp add --transport stdio --env SQLSERVER_WELLKNOWN_1="<Connection String>" local-sql-servers -- dnx SqlServer.AdministrativeViews.McpServer --yes
-``
+```
 
 For both VS Code and Visual Studio, the configuration file uses the following server definition:
 
@@ -97,3 +108,24 @@ For both VS Code and Visual Studio, the configuration file uses the following se
 }
 ```
 
+### Non-local SQL Server with alias
+```
+  "mcpServers": {
+    "SQL Servers": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "dnx",
+        "SqlServer.AdministrativeViews.McpServer",
+        "--yes",
+        "--",
+        "--alias",
+        "Everest",
+        "--connection-string",
+        "Data Source=<network or cloud sql server>; User ID=...; Password=...; TrustServerCertificate=true; Encrypt=False; Pooling=True"
+      ]
+    }
+  }
+```
+
+Parameters --alias (-a) and --connection-string (-cs) can be specified multiple times.
