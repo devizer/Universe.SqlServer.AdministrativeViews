@@ -35,7 +35,7 @@ public class QueryCacheReader
         sqlServerQueryCache = new TheQueryCacheQueryV4(ColumnsSchema).GetSqlQuery();
         var ret = con.Query<QueryCacheRow>(sqlServerQueryCache, null, commandTimeout: 120).ToList();
         foreach (var row in ret)
-            row.Lifetime = now - row.CreationTime;
+            row.Lifetime = TimeSpan.FromSeconds(Math.Max(0d, (now - row.CreationTime).TotalSeconds));
 
         stepsLogger?.Restart($"Populate Object Name and Object Type for {ret.Count} queries");
         // Populate ObjectName and ObjectType
