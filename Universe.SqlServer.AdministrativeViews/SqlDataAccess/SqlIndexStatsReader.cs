@@ -44,7 +44,7 @@ public class SqlIndexStatsReader
             if (dbNameById.TryGetValue(idDatabase, out var dbName))
             {
                 string sqlQueryIndexDetails = $"Use [{dbName}]; " + SqlSelectIndexes;
-                List<SysIndexDetailsRow> indexDetailList = con.Query<SysIndexDetailsRow>(sqlQueryIndexDetails, null).ToList();
+                List<SysIndexDetailsRow> indexDetailList = con.Query<SysIndexDetailsRow>(sqlQueryIndexDetails, null, 90).ToList();
                 foreach (var sysIndexDetailsRow in indexDetailList)
                 {
                     sysIndexDetailsRow.DatabaseId = idDatabase;
@@ -78,7 +78,7 @@ public class SqlIndexStatsReader
     {
         var con = _dbProvider.CreateConnection();
         con.ConnectionString = _connectionString;
-        var rawCollection = con.Query<object>("Select * From sys.dm_db_index_operational_stats(0,0,-1,0)", null);
+        var rawCollection = con.Query<object>("Select * From sys.dm_db_index_operational_stats(0,0,-1,0)", null, 90);
         List<IDictionary<string, long>> ret = new List<IDictionary<string, long>>();
         foreach (object dapperRow in rawCollection)
         {
