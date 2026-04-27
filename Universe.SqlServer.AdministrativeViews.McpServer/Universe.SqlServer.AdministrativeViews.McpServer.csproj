@@ -25,6 +25,7 @@
     <PackageTags>SQL Server; Administrative Views; AI; MCP; server; stdio</PackageTags>
     <Authors>Volodymyr Hoida</Authors>
     <Description>Provides access to queries, metrics and execution plans of SQL Servers. Supports SQL Server 2005 ... 2025, including LocalDB</Description>
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
 
   <!-- Include additional files for browsing the MCP server. -->
