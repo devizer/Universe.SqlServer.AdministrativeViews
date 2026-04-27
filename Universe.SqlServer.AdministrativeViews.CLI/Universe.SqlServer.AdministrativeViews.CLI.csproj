@@ -25,7 +25,6 @@
       <!--<PackageOutputPath>./nupkg</PackageOutputPath>-->
       <IsPackable>true</IsPackable>
       <Title>SQL Server Administrative Views</Title>
-      <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
   	
   <ItemGroup>

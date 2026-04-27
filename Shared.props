@@ -27,7 +27,7 @@
         <Description>MS SQL Server QueryCache Visualisation as a standalone interactive single-file html report. Supports 2005...2025.</Description>
         <PackageProjectUrl>https://github.com/devizer/Universe.SqlServer.AdministrativeViews</PackageProjectUrl>
         <RepositoryUrl>https://github.com/devizer/Universe.SqlServer.AdministrativeViews</RepositoryUrl>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
         <PackageIconUrl>https://raw.githubusercontent.com/devizer/Universe.SqlServer.AdministrativeViews/main/Icon.png</PackageIconUrl>
         <PackageTags>mssql sql server administrative system views query cache execution plan</PackageTags>
         <LangVersion>latest</LangVersion>
