@@ -80,8 +80,15 @@ Once the MCP server package is published to NuGet.org, you can configure it in y
 
 - **VS Code**: Create a `<WORKSPACE DIRECTORY>/.vscode/mcp.json` file
 - **Visual Studio**: Create a `<SOLUTION DIRECTORY>\.mcp.json` file
+- **Claude**: [Add local mcp server](https://code.claude.com/docs/en/mcp#option-3-add-a-local-stdio-server)
 
-## Installation
+Example
+```
+:: Windows
+claude mcp add --transport stdio local-sql-servers -- cmd /c dnx SqlServer.AdministrativeViews.McpServer --yes
+# Linux and MAC
+claude mcp add --transport stdio --env SQLSERVER_WELLKNOWN_1="<Connection String>" local-sql-servers -- dnx SqlServer.AdministrativeViews.McpServer --yes
+```
 
 For both VS Code and Visual Studio, the configuration file uses the following server definition:
 
@@ -100,10 +107,7 @@ For both VS Code and Visual Studio, the configuration file uses the following se
 }
 ```
 
-#### Non-local SQL Server with alias
-
-In the following example, a specific SQL Server is configured on the network or in the cloud, and the alias "Everest" is assigned to it for better usability.
-
+### Non-local SQL Server with alias
 ```
 {
   "mcpServers": {
